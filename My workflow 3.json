@@ -1,0 +1,114 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -128,
+        -48
+      ],
+      "id": "1741413e-5a6c-4c3f-a7fa-e21b3851092f",
+      "name": "When chat message received",
+      "webhookId": "1a9a6ec7-86a9-4d27-9e1f-f1b006c8535c"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assiKamu adalah PyBuddy, asisten belajar pemrograman Python untuk mahasiswa pemula.\n\nTugas:\n- Jawab pertanyaan tentang dasar-dasar Python: variabel, tipe data, operator, percabangan, perulangan, fungsi, list, tuple, dictionary, string, dan error umum.\n- Gunakan Bahasa Indonesia yang sederhana dan ramah.\n- Sertakan contoh kode singkat bila membantu.\n\nBatasan:\n- Jika pertanyaan di luar topik Python, tolak dengan sopan dan ajak pengguna bertanya tentang Python.\n- Jika tidak yakin, katakan terus terang dan jangan mengarang jawaban.stant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        160,
+        -112
+      ],
+      "id": "82a7b676-5db1-4100-bfb0-73c21ff8711f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        128,
+        176
+      ],
+      "id": "0adfc160-519f-4af8-943b-37e41b910aab",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "utIpMv29pcz1mNg7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        288,
+        176
+      ],
+      "id": "0d7f571a-8e0f-474e-b049-49fcd0c3e372",
+      "name": "Simple Memory1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4a872a53-e320-4fea-9e1d-96a4c957f988",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dc96f10ae7dc95d3c138575ba243a0a167923dbcb524841d451aadf9135d5fb3"
+  },
+  "nodeGroups": [],
+  "id": "Nam5FyjDmM0p8J90",
+  "tags": []
+}
